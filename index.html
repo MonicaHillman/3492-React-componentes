@@ -26,15 +26,33 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/babel">
-        function Titulo() {
+        function Titulo({ children }) {
             return (
-                <h1 className='form__titulo'>Login</h1>
+                <h1 className='form__titulo'>{children}</h1>
             )
         }
 
-        function Subtitulo() {
+        function Subtitulo({ children }) {
             return (
-                <h2 className='form__texto'>Boas-vindas! Faça seu login.</h2 >
+                <h2 className='form__texto'>{children}</h2 >
+            )
+        }
+
+        function CampoDeDigitacao({ label, tipo, placeholder }) {
+            return (
+                <div className='form__campo-digitacao'>
+                    <label for='email'>{label}</label>
+                    <input type={tipo}
+                        placeholder={placeholder}
+                        required
+                        id='email' />
+                </div>
+            )
+        }
+
+        function Botao({ children }) {
+            return (
+                <button type='submit' className='form__botao'>{children}</button>
             )
         }
 
@@ -44,22 +62,16 @@
                     <img src='./img/imagem-login.png' alt='uma mulher negra de cabelos crespos usando óculos e mexendo no computador, também há o logo da codeconnect' />
                     <section>
                         <form>
-                            <Titulo />
-                            <Subtitulo />
-                            <div className='form__campo-digitacao'>
-                                <label for='email'>E-mail ou usuário</label>
-                                <input type='email'
-                                    placeholder='Digite o seu e-mail ou usuário'
-                                    required
-                                    id='email' />
-                            </div>
-                            <div className='form__campo-digitacao'>
-                                <label for='senha'>Senha</label>
-                                <input type='password'
-                                    placeholder='Digite sua senha'
-                                    required
-                                    id='senha' />
-                            </div>
+                            <Titulo>Login</Titulo>
+                            <Subtitulo>Boas vindas! Faça o seu login</Subtitulo>
+                            <CampoDeDigitacao label='E-mail ou usuário'
+                                tipo='email'
+                                placeholder='Digite o seu e-mail ou usuário'
+                            />
+                            <CampoDeDigitacao label='Senha'
+                                tipo='password'
+                                placeholder='Digite a sua senha' />
+                            <Botao>Login</Botao>
                         </form>
                     </section>
                 </div>
