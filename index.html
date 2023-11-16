@@ -38,14 +38,16 @@
             )
         }
 
-        function CampoDeDigitacao({ label, tipo, placeholder }) {
+        function CampoDeDigitacao({ label, tipo, placeholder, value, setValor }) {
             return (
                 <div className='form__campo-digitacao'>
-                    <label for='email'>{label}</label>
+                    <label for={tipo}>{label}</label>
                     <input type={tipo}
                         placeholder={placeholder}
                         required
-                        id='email' />
+                        id={tipo}
+                        value={value}
+                        onChange={(evento) => setValor(evento.target.value)} />
                 </div>
             )
         }
@@ -57,20 +59,34 @@
         }
 
         function PaginaDeLogin() {
+            const [email, setEmail] = React.useState('');
+            const [senha, setSenha] = React.useState('');
+
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                console.log('email ' + email);
+                console.log('senha ' + senha);
+            }
+
             return (
                 <div className='container-login'>
                     <img src='./img/imagem-login.png' alt='uma mulher negra de cabelos crespos usando óculos e mexendo no computador, também há o logo da codeconnect' />
                     <section>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <Titulo>Login</Titulo>
                             <Subtitulo>Boas vindas! Faça o seu login</Subtitulo>
                             <CampoDeDigitacao label='E-mail ou usuário'
                                 tipo='email'
                                 placeholder='Digite o seu e-mail ou usuário'
+                                value={email}
+                                setValor={setEmail}
                             />
                             <CampoDeDigitacao label='Senha'
                                 tipo='password'
-                                placeholder='Digite a sua senha' />
+                                placeholder='Digite a sua senha'
+                                value={senha}
+                                setValor={setSenha}
+                            />
                             <Botao>Login</Botao>
                         </form>
                     </section>
